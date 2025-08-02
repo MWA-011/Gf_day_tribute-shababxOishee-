@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Oishee Tribute</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body {
+      font-family: 'Segoe UI', sans-serif;
+      scroll-behavior: smooth;
+    }
+    .page {
+      width: 100%;
+      min-height: 100vh;
+      overflow-x: hidden;
+      overflow-y: auto;
+      position: relative;
+    }
+    #page1 {
+      background: url("image/pg1(real).jpeg") center center no-repeat;
+      background-size: cover;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      padding: 20px;
+    }
+    #introText {
+      font-size: 1.8rem;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 20px;
+      border-radius: 15px;
+      transition: opacity 2s ease-in-out;
+    }
+    #startBtn {
+      margin-top: 30px;
+      padding: 15px 30px;
+      font-size: 1rem;
+      background-color: #ff8da8;
+      border: none;
+      color: black;
+      font-weight: bold;
+      border-radius: 25px;
+      cursor: pointer;
+      display: none;
+    }
+    #page2 {
+      background: white;
+      color: black;
+      padding: 50px 20px 100px;
+      position: relative;
+    }
+    .scroll-container {
+      max-width: 700px;
+      margin: auto;
+    }
+    .line {
+      background: white;
+      border: 2px solid black;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      transition: all 0.5s ease;
+      padding: 20px;
+      font-size: 1.3rem;
+      line-height: 2rem;
+      margin-bottom: 30px;
+      border-radius: 15px;
+      opacity: 0.8;
+    }
+    .line.active {
+      background: #ff8da8;
+      color: white;
+      font-weight: bold;
+      transform: scale(1.02);
+    }
+    .gifs-bg {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      z-index: 0;
+      overflow: hidden;
+      pointer-events: none;
+    }
+    .gifs-bg img {
+      width: 80px;
+      height: 80px;
+      opacity: 0.3;
+      position: absolute;
+      animation: float 10s infinite ease-in-out;
+    }
+    @keyframes float {
+      0% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-20px) rotate(5deg); }
+      100% { transform: translateY(0) rotate(0deg); }
+    }
+    .gifs-bg img:nth-child(1) { top: 10%; left: 5%; }
+    .gifs-bg img:nth-child(2) { top: 30%; left: 80%; }
+    .gifs-bg img:nth-child(3) { top: 70%; left: 15%; }
+    .gifs-bg img:nth-child(4) { top: 50%; left: 60%; }
+    #nextBtn {
+      display: block;
+      margin: 50px auto 0;
+      padding: 15px 25px;
+      font-size: 1rem;
+      background-color: #ff8da8;
+      border: none;
+      color: black;
+      border-radius: 20px;
+      cursor: pointer;
+      position: relative;
+      z-index: 1;
+    }
+    #page3 {
+      background: white;
+      color: black;
+      padding: 60px 20px;
+    }
+    .section {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 60px 0;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s ease;
+    }
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .text-box {
+      max-width: 500px;
+      font-size: 1.2rem;
+      margin: 20px;
+      background-color: #ff8da8;
+      padding: 20px;
+      border-radius: 20px;
+      color: white;
+      text-align: center;
+    }
+    .section img {
+      width: 90%;
+      max-width: 400px;
+      border-radius: 20px;
+    }
+    @media (min-width: 768px) {
+      .section {
+        flex-direction: row;
+        justify-content: center;
+      }
+      .section:nth-child(even) {
+        flex-direction: row-reverse;
+      }
+      .text-box {
+        margin: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Page 1 -->
+  <div class="page" id="page1">
+    <div id="introText">
+      Do you, a person one of her kind reknowned as Oishee?<br/>
+      If you are interested to know about her please click on the Highlighted Button below.
+    </div>
+    <button id="startBtn">Start</button>
+    <audio id="audio1" loop src="audio/page1.mp3"></audio>
+  </div>
+
+  <!-- Page 2 -->
+  <div class="page" id="page2">
+    <div class="gifs-bg">
+      <img src="https://media.giphy.com/media/JIX9t2j0ZTN9S/giphy.gif" />
+      <img src="https://media.giphy.com/media/3oriO0OEd9QIDdllqo/giphy.gif" />
+      <img src="https://media.giphy.com/media/yFQ0ywscgobJK/giphy.gif" />
+      <img src="https://media.giphy.com/media/MF2f6qgrM6sWZ7LJO9/giphy.gif" />
+    </div>
+    <div class="scroll-container" id="scrollText">
+      <div class="line">O – Oh no… I think I might be developing a full-time crush on you...</div>
+      <div class="line">I – If I had a rupee for every time you crossed my mind...</div>
+      <div class="line">S – Seriously, how are you this cute and not a cartoon character?</div>
+      <div class="line">H – Hey, just wondering… is it legal to steal hearts without warning?</div>
+      <div class="line">E – Every time you smile, a puppy somewhere probably learns how to wag its tail.</div>
+      <div class="line">E – Even your name sounds like a love song I want stuck in my head forever.</div>
+      <div class="line">If you want to know how the author’s opinion about this particular, individually particular person, Click Next.</div>
+    </div>
+    <button id="nextBtn">Next</button>
+    <audio id="audio2" loop src="audio/page2.mp3"></audio>
+  </div>
+
+  <!-- Page 3 -->
+  <div class="page" id="page3">
+    <div class="section">
+      <img src="image/pg3(a).jpeg" alt="Oishee Image 1" />
+      <div class="text-box">
+        
+
+      The person Oishee , is that sort of person who is very self-oriented .<br/>
+      No By self oriented I dont mean that relaying on herself.<br/>
+      I am saying it in such manner that if she is having a bad day , she would rather stay alone than letting a person enlighten her day and mood. How cute isn't she?<br/>
+      You bet she is , one of a kind gently spoken person , who can be sometimes a little bit clumsy with her words . But Guess what?<br/>
+
+      ALl of these can be forgiven because of how much of a sweetheart she can be while being someones therapist or in other words being there for that particular person in their hard times .<br/>
+      Despite all of her being sweet soft spoken , She often forget that there is one particular person who is trying his best to  turn her mood into a jolly one. Thats one heck of a girl right?<br/>
+
+      </div>
+    </div>
+    <div class="section">
+      <img src="image/pg3(b).jpeg" alt="Oishee Image 2" />
+      <div class="text-box">
+        Sometimes I wonder will that person be able to shine than rest of the stars which revolving around the Moon? {Oishee}<br/>
+
+        The Universe it self was built throughout alot of eruption. Imagine the cometetition the EARTH had to go through to become the planet around which the MOON will revolve around.<br/>
+
+        Imagine about the thoughts on her parents mind while growing her up , " WIll she become a great person?"<br/>
+
+        Sometimes to see the Greatness inside of a person you need some particular source who can uphold the greatness of hers and appreciate them.<br/>
+
+        It is my utterly request to the MOON [ {Oishhee} to Seclect that Planet { Person who cares} to revolve around<br/>
+      </div>
+    </div>
+    <audio id="audio3" loop src="audio/page3.mp3"></audio>
+  </div>
+
+  <audio id="mainAudio" src="audio/aud1.mp3" loop></audio>
+  <script>
+    const audio1 = document.getElementById("audio1");
+    const audio2 = document.getElementById("audio2");
+    const audio3 = document.getElementById("audio3");
+
+    // Allow playback only after user interacts
+    document.getElementById("startBtn").addEventListener("click", () => {
+      audio1.play();
+      document.getElementById("page2").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("nextBtn").addEventListener("click", () => {
+      audio1.pause();
+      audio2.play();
+      document.getElementById("page3").scrollIntoView({ behavior: "smooth" });
+    });
+
+    window.addEventListener("scroll", () => {
+      document.querySelectorAll(".line").forEach(line => {
+        const rect = line.getBoundingClientRect();
+        if (rect.top >= 0 && rect.top < window.innerHeight / 2) {
+          document.querySelectorAll(".line").forEach(l => l.classList.remove("active"));
+          line.classList.add("active");
+        }
+      });
+
+      document.querySelectorAll(".section").forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add("visible");
+          audio2.pause();
+          audio3.play();
+        }
+      });
+    });
+
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("introText").style.opacity = 0;
+        setTimeout(() => {
+          document.getElementById("introText").style.display = "none";
+          document.getElementById("startBtn").style.display = "inline-block";
+        }, 2000);
+      }, 4000);
+    });
+
+    window.addEventListener("DOMContentLoaded", () => {
+      const mainAudio = document.getElementById("mainAudio");
+      mainAudio.volume = 0.5;
+      // Play after user interaction (required by most browsers)
+      document.body.addEventListener("click", function playOnce() {
+        mainAudio.play();
+        document.body.removeEventListener("click", playOnce);
+      });
+    });
+  </script>
+</body>
+</html>
